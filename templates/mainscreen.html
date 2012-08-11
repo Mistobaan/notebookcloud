@@ -1,0 +1,485 @@
+<!DOCTYPE HTML><head><title> NotebookCloud </title> 
+<!-- NBC 0.3 -->
+
+    <link rel="icon" 
+          type="image/png" 
+          href="/static/logo.png" />
+          
+    <!-- Import Styles -->
+    <link rel="stylesheet" type="text/css" href="/static/styles.css" />
+
+    <!-- Import JS -->
+    <script src="/static/jquery.js"></script>
+    <script src="/static/spin.js"></script>
+
+    <!-- Chrome App Verification Tag-->
+    <meta name="google-site-verification" content="B3HyO5Qg6K7v2217IJNU0nUna_09vhXwxZVetCUwrKg" />
+
+
+</head> <!-- The NotebookCloud Main Screen --> <body onload="refresh_instances('Getting Instance Info...')">
+
+
+    <center>
+    <!-- The Top Buttons -->
+    <table width=100% border=0 style="padding: 2px; padding-left: 1px;">
+    <tr><td width=10% class=ibutton onclick="window.location='/docs'" onselectstart="return false"
+            onmousedown="this.className = 'ibutton_in'" onmouseup="this.className = 'ibutton'" onmouseout="this.className = 'ibutton'">
+            NBCloud Docs
+        <td width=10% class=ibutton onclick="window.location='http://ipython.org/ipython-doc/stable/index.html'" onselectstart="return false"
+            onmousedown="this.className = 'ibutton_in'" onmouseup="this.className = 'ibutton'" onmouseout="this.className = 'ibutton'">
+            IPython Docs
+        <td width=10% class=ibutton onclick="window.location='/mainform'" onselectstart="return false"
+            onmousedown="this.className = 'ibutton_in'" onmouseup="this.className = 'ibutton'" onmouseout="this.className = 'ibutton'">
+            Account Details
+        <td width=10% class=ibutton onclick="delete_account()" onselectstart="return false"
+            onmousedown="this.className = 'ibutton_in'" onmouseup="this.className = 'ibutton'" onmouseout="this.className = 'ibutton'">
+            Delete Account
+        <td class=username width=40%> {{ username }} 
+    </table>
+
+
+<table width=100% border=0>
+    <!-- Launch Panel -->
+    <tr><td style="width: 650px; padding: 0px;">
+        
+        <center>
+        <div>
+            
+            <div class=table>
+            
+                <!-- Standard Instance Type Buttons -->
+                <div class=nav-menu>
+                    <ul><br>
+                    <li class="button" onclick="display_info('a');"
+                        onmousedown="this.className = 'none'" onmouseup="this.className = 'button'"
+                        onmouseout="this.className = 'button'"><a href="#Micro">Micro</a></li>
+                    <li class="button" onclick="display_info('b');"
+                        onmousedown="this.className = 'none'" onmouseup="this.className = 'button'"
+                        onmouseout="this.className = 'button'"><a href="#Small">Small</a></li>
+                    <li class="button" onclick="display_info('c');"
+                        onmousedown="this.className = 'none'" onmouseup="this.className = 'button'"
+                        onmouseout="this.className = 'button'"><a href="#Medium">Medium</a></li>
+                    <li class="button" onclick="display_info('d');"
+                        onmousedown="this.className = 'none'" onmouseup="this.className = 'button'"
+                        onmouseout="this.className = 'button'"><a href="#Large">Large</a></li>
+                    <li class="button" onclick="display_info('e');"
+                        onmousedown="this.className = 'none'" onmouseup="this.className = 'button'"
+                        onmouseout="this.className = 'button'"><a href="#XLarge">XLarge</a></li>
+                    </ul>
+                </div>
+                
+                <div style="clear: both;"></div>
+               
+                <!-- Big Instance Type Buttons -->
+                <div class=nav-menu>
+                <hr>
+                    <ul>
+                    <li class="button" onclick="display_info('f');"
+                        onmousedown="this.className = 'none'" onmouseup="this.className = 'button'"
+                        onmouseout="this.className = 'button'"><a href="#HighMemory">High Memory</a></li>
+                    <li class="button" onclick="display_info('g');"
+                        onmousedown="this.className = 'none'" onmouseup="this.className = 'button'"
+                        onmouseout="this.className = 'button'"><a href="#HighMemoryx2">High Memory x 2</a></li>
+                    <li class="button" onclick="display_info('h');"
+                        onmousedown="this.className = 'none'" onmouseup="this.className = 'button'"
+                        onmouseout="this.className = 'button'"><a href="#HighMemoryx4">High Memory x 4</a></li>
+                    <li class="button" onclick="display_info('i');"
+                        onmousedown="this.className = 'none'" onmouseup="this.className = 'button'"
+                        onmouseout="this.className = 'button'"><a href="#HighCPUMedium">High CPU Medium</a></li>
+                    <li class="button" onclick="display_info('j');"
+                        onmousedown="this.className = 'none'" onmouseup="this.className = 'button'"
+                        onmouseout="this.className = 'button'"><a href="#HighCPUXLarge">High CPU XLarge</a></li>
+                    </ul>
+                </div>
+                
+                <div style="clear: both;"></div>
+                
+                <!-- Cluster Instance Type Buttons -->
+                <div class=nav-menu>
+                <hr>
+                    <ul>
+                    <li class="button" onclick="display_info('k');"
+                        onmousedown="this.className = 'none'" onmouseup="this.className = 'button'"
+                        onmouseout="this.className = 'button'"><a href="#GPUCluster">GPU Cluster</a></li>
+                    <li class="button" onclick="display_info('l');"
+                        onmousedown="this.className = 'none'" onmouseup="this.className = 'button'"
+                        onmouseout="this.className = 'button'"><a href="#SuperCluster">Super Cluster</a></li>
+                    <li class="button" onclick="display_info('m');"
+                        onmousedown="this.className = 'none'" onmouseup="this.className = 'button'"
+                        onmouseout="this.className = 'button'"><a href="#DeathStar">Death Star</a></li>
+                    </ul>
+                </div>
+            
+            </div><br><br><br><br>
+        
+        </div>
+        </center>
+        
+        <!-- The Launcher Text ~ (is updated whenever an instance type button is pressed) -->
+        <td id="dataframe" style="
+            width: 500px;
+            padding:20px;
+            color:#555;
+	    font-size: small;
+            text-align: left;"
+            >
+            <span style="color:#333;">Instance Launcher</span>
+            <br><br>
+            Select any instance type to see more information about it. If you are unsure<br>
+            about your options, please consult the documentation.
+            <br><br><br><br><br><br><br>
+        <td>
+        </table>
+        </div>
+
+</table>
+
+
+        <!-- Graphical Bar ~ (header for instance list)-->        
+        <table width=100% border=0><tr>
+        <td class=panel style="float: left; text-align: left; color: #444; padding: 5px; text-shadow: 0px 1px 1px #FFF;">
+            Your NotebookCloud Servers&nbsp;
+        <td id=spinny_dial style="float: left; width: 20px">
+        </table>
+        
+        
+        <!-- Instance List -->
+        <table width=100% border=0 style="background: #FFF; border-bottom: 1px solid #AAA">
+        <tr><td>
+            <div id=instances style="clear: both; text-align: left; padding: 2px; color: #555; line-height: 25px;">
+            <br>&nbsp;&nbsp;&nbsp;&nbsp;Getting Instance Info...<br><br>
+
+            </div>
+        </table>
+    
+    </center>
+    
+    <!-- Bottom Divider and Highlight for Background -->    
+    <table width=100% border=0><tr><td style="text-align: right;">
+        <a href="http://aws.amazon.com/">AWS Website</a>&nbsp;&nbsp;
+        <a href="http://ipython.org">IPython Website</a>&nbsp;&nbsp;
+        <a href="http://python.org">Python Website</a>&nbsp;&nbsp;
+        <a href="https://plus.google.com/104351793859860277190/">Carl Smith</a>&nbsp;&nbsp;
+    </table>
+    
+
+    <!-- Instance Launcher Info ~ (this just updates the launcher text for each instance type button) -->
+    <!-- Note: You currently need to ensure each description has an equal number of lines before the
+            Launch button, else things move around that shouldn't. -->
+    <script>
+        
+        // Updates the instance info panel and the Launch button
+        function display_info(instance_type) {
+            
+            var obj
+            obj = document.getElementById('dataframe')
+                
+            // Refresh Panel
+            if (instance_type == 'refresh') {
+                output =  '<span style="color:#333;">Instance Launcher</span><br><br>'
+                output += 'Select any instance type to see more information about it. If you are unsure<br>'
+                output += 'about your options, please consult the documentation.'
+                output += '<br><br><br><br><br><br><br>'
+                obj.innerHTML = output;
+                };
+
+            // Micro
+            if (instance_type == 'a') {
+                output =  '<span style="color:#333;">Micro</span><br><br>'
+                output += 'The Micro instance type is a t1.micro instance, with 613MB of memory,<br>'
+                output += '1 EC2 Compute Unit, with one extra for short bursts, and low I/O<br>'
+                output += 'performance. It can only use EBS volumes for storage.<br><br>'
+                output += 'Cost: 2¢ per instance hour. (Qualifies for Free Tier)'
+                output += '<br><div class=nav-menu><ul class=nav-menu>'
+                output += '<li class=ibutton style="float: right; padding: 5px;" id=launchbutton><a onclick="launch(0)">Launch</a>'
+                output += '</li></ul></div>'
+                obj.innerHTML = output;
+                };
+
+            // Small
+            if (instance_type == 'b') {
+                output =  '<span style="color:#333;">Small</span><br><br>'
+                output += 'The Small instance type is an m1.small instance, with 1.75GB<br>'
+                output += 'of memory, 1 EC2 Compute Unit, 160GB of instance<br>'
+                output += 'storage and moderate I/O performance.<br><br>'
+                output += 'Cost: 8¢ per instance hour.'
+                output += '<br><div class=nav-menu><ul class=nav-menu>'
+                output += '<li class=ibutton style="float: right; padding: 5px;" id=launchbutton><a onclick="launch(1)">Launch</a>'
+                output += '</li></ul></div>'
+                obj.innerHTML = output;
+                };
+
+            // Medium
+            if (instance_type == 'c') {
+                output =  '<span style="color:#333;">Medium</span><br><br>'
+                output += 'The Medium instance type is an m1.medium instance, with 3.75GB<br>'
+                output += 'of memory, 2 EC2 Compute Units, 410GB of instance<br>'
+                output += 'storage and moderate I/O performance.<br><br>'
+                output += 'Cost: 16¢ per instance hour.'
+                output += '<br><div class=nav-menu><ul class=nav-menu>'
+                output += '<li class=ibutton style="float: right; padding: 5px;" id=launchbutton><a onclick="launch(2)">Launch</a>'
+                output += '</li></ul></div>'
+                obj.innerHTML = output;
+                };
+
+            // Large
+            if (instance_type == 'd') {
+                output =  '<span style="color:#333;">Large</span><br><br>'
+                output += 'The Large instance type is an m1.large instance, with 7.5GB<br>'
+                output += 'of memory, 4 EC2 Compute Units, 850GB of instance<br>'
+                output += 'storage and high I/O performance.<br><br>'
+                output += 'Cost: 32¢ per instance hour.'
+                output += '<br><div class=nav-menu><ul class=nav-menu>'
+                output += '<li class=ibutton style="float: right; padding: 5px;" id=launchbutton><a onclick="launch(3)">Launch</a>'
+                output += '</li></ul></div>'
+                obj.innerHTML = output;
+                };
+
+            // XLarge
+            if (instance_type == 'e') {
+                output =  '<span style="color:#333;">XLarge</span><br><br>'
+                output += 'The XLarge instance type is an m1.xlarge instance, with 15GB<br>'
+                output += 'of memory, 8 EC2 Compute Units, 1690GB of instance<br>'
+                output += 'storage and high I/O performance.<br><br>'
+                output += 'Cost: 64¢ per instance hour.'
+                output += '<br><div class=nav-menu><ul class=nav-menu>'
+                output += '<li class=ibutton style="float: right; padding: 5px;" id=launchbutton><a onclick="launch(4)">Launch</a>'
+                output += '</li></ul></div>'
+                obj.innerHTML = output;
+                };
+
+            // High Memory
+            if (instance_type == 'f') {
+                output =  '<span style="color:#333;">High Memory</span><br><br>'
+                output += 'The High Memory instance type is an m2.xlarge instance, with 17.1GB<br>'
+                output += 'of memory, 6.5 EC2 Compute Units, 420GB of instance storage<br>'
+                output += 'and moderate I/O performance.<br><br>'
+                output += 'Cost: 45¢ per instance hour.'
+                output += '<br><div class=nav-menu><ul class=nav-menu>'
+                output += '<li class=ibutton style="float: right; padding: 5px;" id=launchbutton><a onclick="launch(5)">Launch</a>'
+                output += '</li></ul></div>'
+                obj.innerHTML = output;
+                };
+                
+            // High Memory x 2
+            if (instance_type == 'g') {
+                output =  '<span style="color:#333;">High Memory x 2</span><br><br>'
+                output += 'The High Memory x 2 instance type is an m2.2xlarge instance, with 34.2GB<br>'
+                output += 'of memory, 13 EC2 Compute Units, 850GB of instance storage and<br>'
+                output += 'high I/O performance.<br><br>'
+                output += 'Cost: 90¢ per instance hour.'
+                output += '<br><div class=nav-menu><ul class=nav-menu>'
+                output += '<li class=ibutton style="float: right; padding: 5px;" id=launchbutton><a onclick="launch(6)">Launch</a>'
+                output += '</li></ul></div>'
+                obj.innerHTML = output;
+                };
+
+            // High Memory x 4
+            if (instance_type == 'h') {
+                output =  '<span style="color:#333;">High Memory x 4</span><br><br>'
+                output += 'The High Memory x 4 instance type is an m2.4xlarge instance, with 68.4GB<br>'
+                output += 'of memory, 26 EC2 Compute Units, 1690GB of instance storage and<br>'
+                output += 'high I/O performance.<br><br>'
+                output += 'Cost: $1.80 per instance hour.'
+                output += '<br><div class=nav-menu><ul class=nav-menu>'
+                output += '<li class=ibutton style="float: right; padding: 5px;" id=launchbutton><a onclick="launch(7)">Launch</a>'
+                output += '</li></ul></div>'
+                obj.innerHTML = output;
+                };
+
+            // High CPU Medium
+            if (instance_type == 'i') {
+                output =  '<span style="color:#333;">High CPU Medium</span><br><br>'
+                output += 'The High CPU Medium instance type is a cc1.4xlarge instance, with 23GB<br>'
+                output += 'of memory, 33.5 EC2 Compute Units, 1690GB of instance storage and<br>'
+                output += 'very high I/O.<br><br>'
+                output += 'Cost: 16.5¢ per instance hour.'
+                output += '<br><div class=nav-menu><ul class=nav-menu>'
+                output += '<li class=ibutton style="float: right; padding: 5px;" id=launchbutton><a onclick="launch(8)">Launch</a>'
+                output += '</li></ul></div>'
+                obj.innerHTML = output;
+                };
+
+
+            // High CPU XLarge
+            if (instance_type == 'j') {
+                output =  '<span style="color:#333;">High CPU XLarge</span><br><br>'
+                output += 'The High CPU XLarge instance type is a c1.xlarge instance, with 7GB<br>'
+                output += 'of memory, 20 EC2 Compute Units, 1690GB of instance storage and<br>'
+                output += 'high I/O performance.<br><br>'
+                output += 'Cost: 66¢ per instance hour.'
+                output += '<br><div class=nav-menu><ul class=nav-menu>'
+                output += '<li class=ibutton style="float: right; padding: 5px;" id=launchbutton><a onclick="launch(9)">Launch</a>'
+                output += '</li></ul></div>'
+                obj.innerHTML = output;
+                };
+                        
+            // GPU Cluster
+            if (instance_type == 'k') {
+                output =  '<span style="color:#333;">GPU Cluster</span><br><br>'
+                output += 'The GPU Cluster instance type is a cg1.4xlarge instance, with 22GB of<br>'
+                output += 'memory, 33.5 EC2 Compute Units, 2 NVIDIA M2050 GPUs, 1690 GB<br>'
+                output += 'of instance storage and very high I/O performance.<br><br>'
+                output += 'Cost: $2.10 per instance hour.'
+                output += '<br><div class=nav-menu><ul class=nav-menu>'
+                output += '<li class=ibutton style="float: right; padding: 5px;" id=launchbutton><a onclick="launch(10)">Launch</a>'
+                output += '</li></ul></div>'
+                obj.innerHTML = output;
+                };
+                
+            // Super Cluster
+            if (instance_type == 'l') {
+                output =  '<span style="color:#333;">Super Cluster</span><br><br>'
+                output += 'The Super Cluster instance type is a cc1.4xlarge instance, with 23GB<br>'
+                output += 'of memory, 33.5 EC2 Compute Units, 1690GB of instance storage<br>'
+                output += 'and very high I/O performance.<br><br>'
+                output += 'Cost: $1.30 per instance hour.'
+                output += '<br><div class=nav-menu><ul class=nav-menu>'
+                output += '<li class=ibutton style="float: right; padding: 5px;" id=launchbutton><a onclick="launch(11)">Launch</a>'
+                output += '</li></ul></div>'
+                obj.innerHTML = output;
+                };
+            
+            // Death Star
+            if (instance_type == 'm') {
+                output =  '<span style="color:#333;">Death Star</span><br><br>'
+                output += 'The Death Star instance type is a cc2.8xlarge instance, with 60.5GB<br>'
+                output += 'of memory, 88 EC2 Compute Units, 3370GB of instance storage<br>'
+                output += 'and very high I/O performance.<br><br>'
+                output += 'Cost: $2.40 per instance hour.'
+                output += '<br><div class=nav-menu><ul class=nav-menu>'
+                output += '<li class=ibutton style="float: right; padding: 5px;" id=launchbutton><a onclick="launch(12)">Launch</a>'
+                output += '</li></ul></div>'
+                obj.innerHTML = output;
+                };
+            };
+        
+    </script><script>
+    
+        // Disables the Anchor Tag on the Instance Type Buttons
+        $('.button').click(function(e) {
+            e.preventDefault();
+            });
+            
+    </script><script>
+        
+        // refresh instances list
+        function refresh_instances(msg) {
+            var html = "<br>&nbsp;&nbsp;&nbsp;&nbsp;" + msg + "<br><br>";
+            document.getElementById("instances").innerHTML = html;
+            
+            var req = new XMLHttpRequest();
+            req.onreadystatechange = function() {
+                if (req.readyState==4 && req.status==200) {
+                    var res = req.responseText;
+                    var refresh = res.substring(res.length-1, res.length);
+                    var data = res.substring(0, res.length-1);
+                    if (refresh == '1') {
+                        setTimeout(refresh_instances('Syncing with AWS...'), 5000);
+                        }
+                    else {
+                        manage_spinner(0)
+                        }
+                    document.getElementById("instances").innerHTML = data;
+                    }
+                }
+            req.open('GET', '/instance_info');
+            req.send()
+            }
+            
+    </script><script>
+    
+        // control instances
+        function control_instances(act, inst, msg) {
+            manage_spinner(1);
+            var html = "<br>&nbsp;&nbsp;&nbsp;&nbsp;" + msg + "<br><br>";
+            document.getElementById("instances").innerHTML = html;
+            
+            var req = new XMLHttpRequest();
+            req.onreadystatechange = function() {
+                if (req.readyState==4 && req.status==200) {
+                    refresh_instances('Syncing with AWS...');
+                    }
+                }
+            var url = '/control/?instance=' + inst + '&action=' + act
+            req.open('GET', url);
+            req.send()
+            }
+            
+    </script><script>
+    
+        // terminate instance
+        function terminate_instance(inst) {
+            var answer = confirm('Terminate Instance ('+inst+')')
+            if (answer) {
+                control_instances('terminate', inst, 'Terminating Instance...');
+                }
+            }
+    
+    </script><script>
+    
+        // delete_account
+        function delete_account() {
+            var answer = confirm('Delete NotebookCloud Account')
+            if (answer) {
+                window.location = '/delete';
+                }
+            }
+    </script><script>
+    
+    
+        // launches new instances
+        function launch(n) {
+            manage_spinner(1);
+            display_info('refresh');
+            var html = "<br>&nbsp;&nbsp;&nbsp;&nbsp;Launching Instance...<br><br>";
+            document.getElementById("instances").innerHTML = html;
+            
+            var req = new XMLHttpRequest();
+            req.onreadystatechange = function() {
+                if (req.readyState==4 && req.status==200) {
+                    refresh_instances('Syncing with AWS...');
+                    }
+                }
+            var url = '/launch/?iclass=' + n;
+            req.open('GET', url);
+            req.send()
+            }
+            
+    </script><script>
+
+        // manages spinner display
+        var spinning = true;
+        var opts = {
+            lines: 5, 
+            length: 2,
+            width: 3,
+            radius: 4,
+            rotate: 54,
+            color: '#090',
+            speed: 1,
+            trail: 50,
+            shadow: false,
+            hwaccel: false,
+            className: 'spinner',
+            zIndex: 2e9,
+            top: 3,
+            };
+        var target = document.getElementById('spinny_dial');
+        var spinner = new Spinner(opts).spin(target);
+        
+        function manage_spinner(on) {
+            if (on == 0) {
+                spinning = false;
+                spinner.stop(target);
+                }
+            else {
+                spinning = true;
+                spinner.spin(target);
+                }
+            }
+
+    </script>
+
+</body></html>
+

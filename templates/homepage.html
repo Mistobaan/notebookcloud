@@ -1,0 +1,35 @@
+<!DOCTYPE HTML><head><title> NBCloud Docs </title>
+
+    <link rel="icon" 
+          type="image/png" 
+          href="/static/logo.png" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="/static/styles.css" />
+    
+    
+</head> <!-- The NotebookCloud Login Screen ~ (this file shouldn't really be called homepage.html) -->
+
+<center>
+    <div class=page>
+        <b>NotebookCloud</b>
+        <br><br>
+        {{ lastline|safe }}
+        <!-- Nav Menu -->
+        <div>
+            <form>
+            <input type=button class="ibutton" onclick="window.location.href = '/docs'"
+                onmousedown="this.className = 'ibutton_in'" onmouseup="this.className = 'ibutton'"
+                onmouseout="this.className = 'ibutton'" value="Documentaion">
+            <br><br>
+            <input type=button class="ibutton" onclick="window.location.href = '{{ goto }}'"
+                onmousedown="this.className = 'ibutton_in'" onmouseup="this.className = 'ibutton'"
+                onmouseout="this.className = 'ibutton'" value="{{ button }}">
+            </form>
+        </div>
+
+    </div>
+</center>
+
+</body>
+</html>

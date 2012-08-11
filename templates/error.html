@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<head><title> !!! Error !!! </title>
+
+    <link rel="icon" 
+          type="image/png" 
+          href="/static/logo.png" />
+          
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="/static/styles.css" />
+
+
+</head> <!-- The NotebookCloud Error Page --> <body class=docsbody>
+
+    
+    <br>
+    
+    <!-- Error Message -->
+    <span class=bolder>&nbsp;&nbsp;&nbsp;&nbsp;Error:</span> {{ error|safe }}
+
+    <!-- Buttons -->   
+    <form>
+    <hr>
+    
+        <input type="button" value="Edit Details" class="ibutton" style="float: left;"
+            onmousedown="this.className = 'ibutton_in'" onmouseup="this.className = 'ibutton'" onmouseout="this.className = 'ibutton'"
+            onclick="window.location.href = '/mainform'">
+
+        <input type="button" value="Documentation" class="ibutton" style="float: left;"
+            onmousedown="this.className = 'ibutton_in'" onmouseup="this.className = 'ibutton'" onmouseout="this.className = 'ibutton'"
+            onclick="window.location.href = '/docs'">
+
+    </form>
+    
+
+</body>
+</html>
+

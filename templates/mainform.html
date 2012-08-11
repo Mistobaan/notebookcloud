@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<head><title> User Details </title>
+    
+    <link rel="icon"
+          type="image/png" 
+          href="/static/logo.png" />
+          
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="/static/styles.css" />
+
+    <!-- Passwords Match, Or Don't -->
+    <script type="text/javascript">
+
+        // tracks whether password inputs currently match and are both non-empty
+        var matching = false;
+
+        function checkpwds() {
+            // this function informs the user that non-empty password inputs
+            // do or don't match by updating <div id='pwd'> everytime the
+            // user modifies either field's content
+            
+            var output;
+            this.pwd0 = document.userinput.pwd0.value;
+            this.pwd1 = document.userinput.pwd1.value;
+            output = document.getElementById('pwd');
+            
+            if (this.pwd0 == this.pwd1 && this.pwd0 != "") {
+                output.innerHTML = '<span class="pwd_good">Passwords Match</span>';
+                matching = true;
+                return;
+                }
+            
+            if (this.pwd0 == "" || this.pwd1 == "") {
+                output.innerHTML = '&nbsp;';
+                matching = false;
+                return;
+                }
+                
+            output.innerHTML = '<span class="pwd_bad">Passwords Do Not Match</span>';
+            matching = false;
+            }
+            
+    </script>
+
+
+</head> <!-- The Main Form page --><body>
+
+    <center>
+    <div class=page style="text-align: left; padding: 20px; padding-bottom: 10px; width: 1000px">
+        
+    <div>
+    
+        <b>NotebookCloud: Account Details</b> <span style="float: right; color:#999"> {{ username }} </span>
+        <hr>
+
+        <form name="userinput" action="/formsubmit" method="post">
+
+            <div style="padding:10px">
+                
+                <div style="float: right; box-shadow: 0px 0px 10px #777; padding: 3px;"><img src="/static/keys.png">
+                    <br><span style="float: right; padding: 11px;">
+                    <a href="https://portal.aws.amazon.com/gp/aws/securityCredentials">Amazon Web Services</a>
+                </div>
+                
+                <br><b><i>AWS Access Keys</i></b>
+                <br><br>
+                
+                Copy and paste the access key and secret key<br> from your
+                <a href="https://portal.aws.amazon.com/gp/aws/securityCredentials">Amazon Web Services</a> account.
+                <br>
+                <div style="padding: 20px;">
+                AWS <span class="bolder">Access</span> Key: <br>
+                    <input type="password" name="key0"> <br><br>
+                AWS <span class="bolder">Secret</span> Key: <br>
+                    <input type="password" name="key1"> <br>
+            </div><br><br>
+
+                <b><i>Notebook Password</i></b><br>
+                <p>Provide the password you'd like to use to access<br> your notebooks. It's traditional to
+                do this twice.</p>
+            
+                <div style="padding-left: 20px;">
+
+                <br>
+                <input type="password" name="pwd0" onKeyUp="checkpwds()"> &nbsp;
+                <input type="password" name="pwd1" onKeyUp="checkpwds()"> &nbsp;
+                
+                <span id="pwd"><b></b></span>
+            
+                <input style="float: right;" type="submit" value="Save" class="ibutton" onmousedown="this.className = 'ibutton_in'"
+                onmouseup="this.className = 'ibutton'" onmouseout="this.className = 'ibutton'">
+                
+                <input style="float: right;" type="button" value="Cancel" class="ibutton" onmousedown="this.className = 'ibutton_in'"
+                onmouseup="this.className = 'ibutton'" onmouseout="this.className = 'ibutton'"
+                onclick="window.location.href = '/'">
+                <br>
+            </div>
+          
+        </form>
+    </div>
+    </div>
+    
+    </center>
+
+</body>
+</html>
+

@@ -1,0 +1,197 @@
+body {
+    background: #DDD;
+    color: #333;
+    font-family: arial;
+    margin: 0px;
+    }
+
+.docsbody {
+    font-family: arial;
+    margin: 4em;
+    border: 2px;
+    margin-top: 4em;
+    }
+
+.instance {
+    border: 1px solid #BBB;
+    box-shadow: 0px 0px 10px #CCC;
+    margin: 5px;
+    padding: 3px;
+    padding-left: 6px;
+    }
+
+#serving {
+    font-size: 14px;
+    color: #494;
+    }
+
+a {color:#888; font-size: 12px;}
+b {color:#555}
+
+table {
+    text-align: center;
+    background: -moz-linear-gradient(top,
+        rgba(235,235,235,1) 0%,
+        rgba(200,200,200,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom,
+        color-stop(0%,rgba(235,235,235,1)),
+        color-stop(100%,rgba(200,200,200,1)));
+    text-decoration: none;
+    border-top: 1px solid #FFF;
+    border-bottom: 1px solid #888;
+    }
+    
+td.username {
+    color: #555;
+    text-align: right;
+    text-shadow: 0px 1px 1px #FFF;
+    padding-right: 8px;
+    }
+
+td.panel {
+    padding: 16px;
+    }
+
+.tablelike {
+    background: -moz-linear-gradient(top,
+        rgba(235,235,235,1) 0%,
+        rgba(200,200,200,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom,
+        color-stop(0%,rgba(235,235,235,1)),
+        color-stop(100%,rgba(200,200,200,1)));
+    border-top: 1px solid #FFF;
+    border-bottom: 1px solid #888;
+    }
+
+.ibutton {
+    cursor: pointer;
+    color: #444;
+    font-size: 12px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border: 1px solid #888;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #777;
+    border-radius: 4px;
+    text-shadow: 0px 1px 1px #EEE;
+    background: -moz-linear-gradient(top,
+        rgba(255,255,255,1) 0%,
+        rgba(220,220,220,1) 8%,
+        rgba(170,170,170,1) 95%,
+        rgba(160,160,160,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom,
+        color-stop(0%,rgba(255,255,255,1)),
+        color-stop(8%,rgba(220,220,220,1)),
+        color-stop(95%,rgba(170,170,170, 1)),
+        color-stop(100%,rgba(160,160,160,1)));
+    }
+      
+.ibutton_in {
+    cursor: pointer;
+    color: #333;
+    font-size: 12px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border: 1px solid #777;
+    border-top: 1px solid #888;
+    border-bottom: 1px solid #666;
+    border-radius: 4px;
+    text-shadow: 0px 1px 1px #DDD;
+    background: -moz-linear-gradient(top,
+        rgba(245,245,245,1) 0%,
+        rgba(200,200,200,1) 8%,
+        rgba(150,150,150,1) 95%,
+        rgba(120,120,120,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom,
+        color-stop(0%,rgba(245,245,245,1)),
+        color-stop(8%,rgba(200,200,200,1)),
+        color-stop(95%,rgba(150,150,150, 1)),
+        color-stop(100%,rgba(120,120,120,1)));     
+    }
+    
+.table {
+	display: table;
+	margin: 0 auto;
+    }
+
+.button:hover {
+    box-shadow: 0px 7px 5px -6px #BBB;
+    }
+
+.nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0px;
+    font-weight: 100;
+    }
+
+.nav-menu li {
+    float: left;
+    margin: 3px;
+    margin-top: 3px;
+    margin-bottom: 4px;
+    }
+
+.nav-menu li a {
+    font-size: 11px;
+    background-color: #FCFCFC;
+    border-radius: 4px;
+    box-shadow: 0px 7px 7px -7px #999;
+    height: 2em;
+    line-height: 2em;
+    float: left;
+    width: 9em;
+    display: inline;
+    border: 1px solid #999;
+    color: #333;
+    text-decoration: none;
+    text-align: center;
+    clear: both;
+    }
+
+.page {
+    margin: 110px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    background: #FFF;
+    border: 1px solid #777;
+    padding: 100px;
+    padding-top: 80px;
+    text-align: center;
+    box-shadow: 0px 0px 20px #999;
+    }
+
+.title {
+    width: 650px;
+    text-align: left;
+    font-weight: 900;
+    color: #555;
+    }
+
+.username {
+    float: right;
+    color:#999;
+    font-weight: 100;
+    padding: 6px;   
+    }
+    
+.bolder {
+    color: #B44;
+    font-weight: 900;
+    }
+    
+.pwd_good {
+    color: #292;
+    font-weight: 900;
+    }
+    
+.pwd_bad {
+    color: #922;
+    font-weight: 900;
+    }
+
+.texts {
+    text-align: justify;
+    width: 80%;
+    margin: 100px;
+    }

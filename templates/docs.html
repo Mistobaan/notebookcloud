@@ -1,0 +1,204 @@
+<!DOCTYPE HTML><head><title> NBCloud Docs </title>
+
+    <link rel="icon" 
+          type="image/png" 
+          href="/static/logo.png" />
+          
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="/static/styles.css" />
+
+
+</head> <!-- The NotebookCloud Documentation --> <body>
+
+
+    <center>
+    <div class=page style="text-align: justify">
+        
+        <div>
+                <b>NotebookCloud Documentation</b>
+                <hr><br><br>
+                                
+                <b>Introduction</b>
+                <br><br>
+                NotebookCloud is service that allows you to launch and control IPython Notebook servers
+                on Amazon EC2 from your browser. This enables you to host your own Python programming
+                environment, on your own Amazon virtual machine, and access it from any modern web
+                browser. You can set everything up in a minute or two, and it's very easy to use.
+                <br><br>
+                NotebookCloud is a simple web app that allows you to launch and control as many machines
+                as you like. The interface also provides links to any of your machines that are currently
+                serving IPython, so you can easily find them without having to worry about EC2 URLs.
+                <br><br>
+                NotebookCloud is essentially a web based wrapper around the EC2 API, so you need an Amazon
+                Web Services account to use it, but they are easy to sign up for and you get plenty of
+                freebies for the first year.
+                <br><br>
+                NotebookCloud is a free service, you are not charged for using it at all. AWS is
+                not a free service and you should ensure that you understand their terms and conditions before
+                using NotebookCloud.
+                <br><br>
+                Each virtual machine created on EC2 uses an Amazon Machine Image, an AMI, as its stack. AMIs are
+                just cloud distros. The NotebookCloud AMI uses Ubuntu as its base and then bundles a number of
+                useful extras. The AMI is summarised below.
+                
+                <div style="font-size:12pt; padding:10px;padding-bottom:0px;margin:30px;" class=instance>
+                NotebookCloud AMI, Version 0.1
+                    <ul>
+                        <li> IPython 0.13 on Ubuntu Server 12.04 LTS
+
+                        <li> Support for all the core IPython features, including inline plotting
+
+                        <li> Support for R, Cython and Octave magic
+
+                        <li> Support for python3, sh, bash, perl and ruby magic
+
+                        <li> Includes pip, setuptools, Pexpect, nose, Sphinx, Pygments and boto
+
+                        <li> Includes pandas, NetworkX, mpi4py, pyTables and h5py
+
+                        <li> Includes SciKit learn and statsmodels
+                    </ul>
+                </div>
+                If you have any input regarding stuff you'd like to see bundled in the next AMI release, please
+                get in touch. The current AMI is focussed on scientific use, in keeping with IPython's primary focus.
+                Over time, support for other types of use will be included.
+                <br><br>
+                NotebookCloud is open source, so anyone interested in using any code or ideas for their own project is
+                encouraged to get in touch.
+                <br><br>
+                Any credit is due to the open source community at large, and the IPython developers in particular.
+                If you'd like to offer your thanks in some way, you should pay those guys a visit.
+                <br><br><br><br>
+                
+                <b>Prerequisites</b>
+                <br><br>
+                NotebookCloud uses Google Accounts and Amazon Web Services. Before you use NotebookCloud,
+                you should sign up for Gmail and AWS, making sure you understand the terms of both account
+                systems, especially billing on AWS, which is fine grained.
+                <br><br>
+                IPython Notebook will work on any modern browser, including Chrome, Firefox and Safari.
+                It does not work with Internet Explorer 9 or less and has not been tested on IE10 at this time.
+                Obviously, NotebookCloud can not support a browser that IPython Notebook can not support.
+                <br><br><br><br>
+
+                <b>Your Personal Information</b>
+                <br><br>
+                    <i>Introduction</i>
+                <br><br>
+                To function, NotebookCloud must have access to some of your details. These details are stored
+                using Google App Engine's Datastore, using 2-step verification to prevent unauthorised access.
+                <br><br>
+                We do not store any details beyond what is covered in this document.
+                <br><br>
+                All communication between your browser and NotebookCloud, as well as all communication between
+                NotebookCloud and AWS, is encrypted.
+                <br><br>
+                All communication between you and your notebook servers is also encrypted, but uses a self-signed
+                certificate that your server will create for you the first time it is launched, using random data
+                provided by NotebookCloud. Because the certificate is not issued by a recognised certificate
+                authority, your browser will raise a warning of some kind. It is perfectly safe to proceed and the
+                encryption is just as dependable as ever.
+                <br><br>
+                    <i>AWS Keys</i>
+                <br><br>
+                NotebookCloud needs your AWS account keys to validate requests to your EC2 account. These are
+                used to launch new instances, as well as to access information about those instances.
+                <br><br>
+                NotebookCloud can not access your server's internals. NotebookCloud servers can not read from,
+                write to, nor execute anything on your servers. NotebookCloud can retrieve information about the
+                state of your servers, as well as launch, start, stop, reboot and terminate them.
+                <br><br>
+                Please note: Whilst our servers ignore any instances on your AWS account that were not launched
+                from your NotebookCloud account, we do have the technical ability to access them. This may be a
+                security concern for some users.
+                <br><br>
+                    <i>Password</i>
+                <br><br>
+                You need to provide a password that you'll use to log into your notebooks. We do not store this password.
+                It is hashed as soon as it is submitted to us and stored in that form. If you forget your password,
+                we can not retrieve it for you. You will not be able to access your existing notebooks.
+                <br><br>
+                    <i>Summary</i>
+                <br><br>
+                We use Google App Engine's Datastore, with access protected by 2-step verification, to store your
+                AWS keys, your hashed password and a list, referencing any instances we have created on your account
+                that still exist.
+                <br><br>
+	                <i>Deletion</i>
+                <br><br>
+                You can delete your NotebookCloud account at any point. Deletion is immediate, total and irreversible.
+                You can create a new account in about a minute, anytime you like.
+                <br><br>
+                Please note: If you have any security concerns regarding your AWS account, you should change your AWS
+                access keys by creating a new set, then deleting the old ones. It is also good practice to change your
+                keys periodically.
+                <br><br><br><br>
+
+                <b>The AMI</b>
+                <br><br>
+                The NotebookCloud AMI is public and freely available for use, modification and redistribution. It can be
+                launched normally, from the AWS EC2 Management Console, but this option is only useful when developing
+                the AMI. When launched in this way, it will not attempt to self-configure, nor will it launch the IPython
+                Notebook server.
+                <br><br><br><br>
+                
+                <b>Instance Types</b>
+                <br><br>
+                You can launch any of the instance types available on EC2 from NotebookCloud. Some of these instance types
+                can be expensive to run. You should always ensure you've read Amazon's official documentation to ensure
+                you know what you are running and what it will cost. NotebookCloud uses different names than Amazon for
+                instance types, as shown in the following table.
+                <br><br><br>
+                
+                <table width=100% style="
+                    text-align: left;
+                    background: #FFF;
+                    border: 1px solid #BBB;
+                    padding: 1em;
+                    box-shadow: 0px 0px 10px #AAA;
+                    ">
+                <tr><td><b>NBC Name</b><td><b>EC2 API Name</b><td><b>EC2 Docs Name</b>
+                <tr><td> Micro              <td> t1.micro       <td> Micro Instance
+                <tr><td> Small              <td> m1.small       <td> Small Instance
+                <tr><td> Medium             <td> m1.medium      <td> Medium Instance
+                <tr><td> Large              <td> m1.large       <td> Large Instance
+                <tr><td> XLarge             <td> m1.xlarge      <td> Extra Large Instance
+                <tr><td> High Memory        <td> m2.xlarge      <td> High-Memory Extra Large Instance
+                <tr><td> High Memory x 2    <td> m2.2xlarge     <td> High-Memory Double Extra Large Instance
+                <tr><td> High Memory x 4    <td> m2.4xlarge     <td> High-Memory Quadruple Extra Large Instance
+                <tr><td> High CPU Medium    <td> c1.medium      <td> High-CPU Medium Instance
+                <tr><td> High CPU XLarge    <td> c1.xlarge      <td> High-CPU Extra Large Instance
+                <tr><td> GPU Cluster        <td> cg1.4xlarge    <td> Cluster GPU Quadruple Extra Large Instance
+                <tr><td> Super Cluster      <td> cc1.4xlarge    <td> Cluster Compute Quadruple Extra Large Instance
+                <tr><td> Death Star         <td> cc2.8xlarge    <td> Cluster Compute Eight Extra Large Instance
+                </table><br><br>
+                
+            <hr>
+                
+            <!-- Nav Buttons -->
+            <div>
+                <form>
+                <input type=button class="ibutton" style="float: left;"
+                onclick="window.location.href = '/'"
+                onmousedown="this.className = 'ibutton_in'" onmouseup="this.className = 'ibutton'"
+                onmouseout="this.className = 'ibutton'" value="NotebookCloud App">
+                <input type=button class="ibutton" style="float: right;"
+                onclick="window.location.href = 'http://aws.amazon.com/ec2/'"     
+                onmousedown="this.className = 'ibutton_in'" onmouseup="this.className = 'ibutton'"
+                onmouseout="this.className = 'ibutton'" value="Amazon EC2 Docs">
+                </form>
+            </div>
+        
+        </div>
+
+    </div>
+    </center>
+   
+    <!-- Branding -->
+    <div align="center">
+        <img src="/static/brand.png">
+    </div><br>
+
+</body>
+</html>
+
