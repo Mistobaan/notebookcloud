@@ -1,0 +1,3 @@
+## NotebookCloud
+
+This is where the files are kept for the NotebookCloud web app. You need to add the boto library to the app's root directory before deploying this to App Engine.
