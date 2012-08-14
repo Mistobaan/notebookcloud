@@ -57,28 +57,16 @@ class InstanceInfo(BaseHandler):
 
         acc = self.check_user()
         if acc:
+             
+            time.sleep(3) # Takes some time to sync
                 
-            if not acc.valid:
-            
-                html = template_dir + 'error.html'
-                args = {'error': 'Your account details are invalid.'}
-                self.response.out.write(template.render(html, args))
-
-            else:
-            
-                acc.reservations = update_reservation_ids(
-                    acc.access_key, acc.secret_key, acc.reservations
-                    )
-
-                acc.put()
+            refresh, html = get_instance_list(
+                acc.access_key, acc.secret_key
+                )
                 
-                refresh, html = get_instance_list(
-                    acc.access_key, acc.secret_key, acc.reservations
-                    )
-                
-                html += '1' if refresh else '0'
+            html += '1' if refresh else '0'
 
-                self.response.out.write(html)
+            self.response.out.write(html)
 
         else: self.redirect('/login')
 
@@ -124,7 +112,7 @@ class LaunchVM(BaseHandler):
             
             acc.reservations.append(reservation)
             acc.put()
-            
+    
         self.redirect('/login')
 
 

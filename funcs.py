@@ -36,21 +36,7 @@ def hash_password(password):
     return ':'.join(('sha1', salt, h.hexdigest()))
 
 
-def update_reservation_ids(access_key, secret_key, users_reservations):
-    '''This function returns a list of ids for all instances we have launched
-    that still exist.'''
-    
-    connection = EC2Connection(access_key, secret_key)
-    
-    aws_list = [
-        str(res).split(':')[1]
-        for res in connection.get_all_instances()
-        ]
-    
-    return [ res for res in aws_list if res in users_reservations ]
-
-
-def get_instance_list(access_key, secret_key, users_reservations):
+def get_instance_list(access_key, secret_key):
     '''This function returns the html for the instance info that is displayed
     by the client in the Your Notebook Servers panel.'''
     
@@ -60,84 +46,85 @@ def get_instance_list(access_key, secret_key, users_reservations):
     
     connection = EC2Connection(access_key, secret_key)
     
-    reservations = [
-        res for res in connection.get_all_instances()
-        if str(res).split(':')[1] in users_reservations
-        ]
-        
+    reservations = connection.get_all_instances()
     instances = [inst for res in reservations for inst in res.instances]
 
     for inst in instances:
         
-        dns_name      = inst.__dict__['public_dns_name']
-        state         = inst.__dict__['state']
-        instance_type = inst.__dict__['instance_type']
-        instance_id   = inst.__dict__['id']
-        date, time    = inst.__dict__['launch_time'].split('T')
+        ours  = inst.__dict__['image_id'] == 'ami-affe51c6'
+        lives = inst.__dict__['state'] != 'terminated'
         
-        time=time[:-5]
+        if ours and lives:
 
-        transitional = False
-        if (state == 'shutting-down' or state == 'pending'
-            or state == 'stopping' or state == 'running'
-            ): transitional = True
+            dns_name      = inst.__dict__['public_dns_name']
+            state         = inst.__dict__['state']
+            instance_type = inst.__dict__['instance_type']
+            instance_id   = inst.__dict__['id']
+            date, time    = inst.__dict__['launch_time'].split('T')
         
-        # note: the variable `state` below will be changed to 'serving' if the
-        # IPython server is online. nbc has no running state, all running
-        # servers are classed as booting or serving
-        if state == 'running': state = 'booting'
-            
-        html_string = (
-            '<div class=instance>Instance id: <b>{}</b>Class: <b>{}</b>'
-            'Born: <b>{}</b> ~ <b>{}</b><br>{}State: '
-            ).format(instance_id + tab, instance_type + tab, time, date, tab)
+            time=time[:-5]
+
+            transitional = False
+            if state in ('shutting-down', 'pending', 'stopping', 'running'):
+                transitional = True
         
-        if dns_name:
+            # note: the variable `state` below will be changed to 'serving' if the
+            # IPython server is online. nbc has no running state, all running
+            # servers are classed as booting or serving
+            if state == 'running': state = 'booting'
             
-            try: # check if the instance is actively serving
+            html_string = (
+                '<div class=instance>Instance id: <b>{}</b>Type: <b>{}</b>'
+                'Started: <b>{}</b> ~ <b>{}</b><br>{}State: '
+                ).format(instance_id + tab, instance_type + tab, time, date, tab)
+        
+            if dns_name:
             
-                urlfetch.fetch(
-                    'https://'+dns_name+':8888',
-                    validate_certificate=False,
-                    deadline=25
-                    ).content
+                try: # check if the instance is actively serving
+            
+                    urlfetch.fetch(
+                        'https://'+dns_name+':8888',
+                        validate_certificate=False,
+                        deadline=25
+                        ).content
                                 
-            except:
+                except:
             
-                state = '<b>'+state+'</b>'
-                html_output += html_string + state + '</div>'
+                    state = '<b>'+state+'</b>'
+                    html_output += html_string + state + '</div>'
                 
-            else:
+                else:
             
-                html = template_dir + 'serving_buttons.html'
-                args = {'instance': instance_id}
-                serving_buttons = template.render(html, args)
+                    html = template_dir + 'serving_buttons.html'
+                    args = {'instance': instance_id}
+                    serving_buttons = template.render(html, args)
                 
-                html_output += (
-                    html_string +
-                    '<a id="serving" href="https://{}:8888">serving</a>{}</div>'
-                    ).format(dns_name, serving_buttons)
+                    html_output += (
+                        html_string +
+                        '<a id="serving" href="https://{}:8888">serving</a>{}</div>'
+                        ).format(dns_name, serving_buttons)
                 
-                # now we know we're running, not booting
-                transitional = False
+                    # now we know we're running, not booting
+                    transitional = False
 
-        else:
-        
-            if state == 'stopped':
-            
-                state = '<b>stopped</b>'
-                html = template_dir + 'stopped_buttons.html'
-                args = {'instance': instance_id}
-                stopped_buttons = template.render(html, args)
-                html_output += html_string + state + stopped_buttons + '</div>'
-            
             else:
-            
-                state = '<b>'+state+'</b>'
-                html_output += html_string + state + '</div>'
         
-        if transitional: refresh = True
+                if state == 'stopped':
+            
+                    state = '<b>stopped</b>'
+                    html = template_dir + 'stopped_buttons.html'
+                    args = {'instance': instance_id}
+                    stopped_buttons = template.render(html, args)
+                    html_output += html_string + state + stopped_buttons + '</div>'
+            
+                else:
+            
+                    state = '<b>'+state+'</b>'
+                    html_output += html_string + state + '</div>'
+        
+            if transitional: refresh = True
     
+
     if not html_output:
     
         html_output = (
@@ -192,6 +179,3 @@ def control_vm(action, instance_list, access_key, secret_key):
     elif action == 'reboot':
         connection.reboot_instances(instance_ids=instance_list)
         
-    time.sleep(2) # this takes a moment to register
-    
-
